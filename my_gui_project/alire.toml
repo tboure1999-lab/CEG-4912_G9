@@ -1,0 +1,24 @@
+name             = "my_gui_project"
+version          = "0.1.0-dev"
+description      = "Test LVGL on STM32F429"
+authors          = ["Your Name"]
+maintainers      = ["Your Name <example@example.com>"]
+maintainers-logins = ["github-username"]
+licenses         = "MIT OR Apache-2.0 WITH LLVM-exception"
+website          = ""
+tags             = []
+executables      = ["my_gui_project"]
+
+[[depends-on]]
+name    = "lvgl_ada"
+version = "^1.0.0"
+
+[[depends-on]]
+name    = "ada_drivers_library"
+version = "^1.5.0"
+
+[configuration.lvgl_ada]
+density_per_inch      = 96
+pixel_bit_depth       = 16
+horizontal_resolution = 480
+vertical_resolution   = 320

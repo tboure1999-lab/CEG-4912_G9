@@ -1,0 +1,6 @@
+dependency:stm32_gui=0.1.0=3ee674d2b93dc9506389e115fb01936ceddd850a63beae621d8cf36a7eb596b0
+dependency:stm32f429disco=0.1.0=889ab963feec0991851c3be89f19344fb5b82b13dbe59edcaca23d6420e4ffef
+external:LIBRARY_TYPE=default
+external:ULTRASONIC_LIBRARY_TYPE=default
+profile:ultrasonic=DEVELOPMENT
+switches:ultrasonic=-Og,-fdata-sections,-ffunction-sections,-g,-gnatVa,-gnatW8,-gnatw.X,-gnatwa,-gnaty-d,-gnaty3,-gnatyA,-gnatyB,-gnatyI,-gnatyO,-gnatyS,-gnatya,-gnatyb,-gnatyc,-gnatye,-gnatyf,-gnatyh,-gnatyi,-gnatyk,-gnatyl,-gnatym,-gnatyn,-gnatyp,-gnatyr,-gnatyt,-gnatyu,-gnatyx

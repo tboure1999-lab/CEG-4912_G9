@@ -1,0 +1,22 @@
+﻿# Build outputs
+Debug/
+Release/
+bin/
+obj/
+*.o
+*.d
+*.su
+*.elf
+*.map
+*.list
+*.cyclo
+*.s
+# IDE / system files
+.vscode/
+*.log
+*.cache
+Thumbs.db
+.DS_Store
+# RSA keys (already present)
+ed25519
+ed25519.pub

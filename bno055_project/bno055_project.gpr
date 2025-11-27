@@ -1,0 +1,25 @@
+with "config/bno055_project_config.gpr";
+project Bno055_Project is
+
+   for Target use "arm-eabi";
+   for Runtime ("Ada") use "embedded-stm32f429disco";
+   
+   for Source_Dirs use ("src/", "config/");
+   for Object_Dir use "obj/" & Bno055_Project_Config.Build_Profile;
+   for Create_Missing_Dirs use "True";
+   for Exec_Dir use "bin";
+   for Main use ("main.adb");
+
+   package Compiler is
+      for Default_Switches ("Ada") use Bno055_Project_Config.Ada_Compiler_Switches;
+   end Compiler;
+
+   package Binder is
+      for Switches ("Ada") use ("-Es"); --  Symbolic traceback
+   end Binder;
+
+   package Install is
+      for Artifacts (".") use ("share");
+   end Install;
+
+end Bno055_Project;

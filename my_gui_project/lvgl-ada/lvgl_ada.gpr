@@ -1,0 +1,58 @@
+with "lvgl-ada";
+
+project LVGL_Ada is
+
+   Extra_Source_Dirs := ();
+   case LVGL_Ada_Config.Pixel_Bit_Depth is
+      when "Pix_1bit"  =>
+         Extra_Source_Dirs := Extra_Source_Dirs & ("src/color_1");
+      when "Pix_8bit"  =>
+         Extra_Source_Dirs := Extra_Source_Dirs & ("src/color_8");
+      when "Pix_16bit" =>
+         case LVGL_Ada_Config.Color_16_SWAP is
+            when "True" =>
+               Extra_Source_Dirs := Extra_Source_Dirs & ("src/color_16_swap");
+            when others =>
+               Extra_Source_Dirs := Extra_Source_Dirs & ("src/color_16");
+         end case;
+      when "Pix_32bit" =>
+         Extra_Source_Dirs := Extra_Source_Dirs & ("src/color_32");
+   end case;
+
+   for Languages use ("Ada", "C");
+   for Source_Dirs use ("src",
+                        "config",
+                        "lvgl/lv_core",
+                        "lvgl/lv_draw",
+                        "lvgl/lv_fonts",
+                        "lvgl/lv_hal",
+                        "lvgl/lv_misc",
+                        "lvgl/lv_objx",
+                        "lvgl/lv_themes",
+                        "lvgl/")
+                        & Extra_Source_Dirs;
+
+   for Object_Dir use "obj";
+   for Library_Dir use "lib";
+
+   for Library_Name use "lvgl_ada";
+   for Library_Version use Project'Library_Name & ".so." & lvgl_ada_Config.Crate_Version;
+
+   type Library_Type_Type is ("relocatable", "static", "static-pic");
+   Library_Type : Library_Type_Type :=
+     external ("BB_PICO_BSP_LIBRARY_TYPE", external ("LIBRARY_TYPE", "static"));
+   for Library_Kind use Library_Type;
+   for Create_Missing_Dirs use "True";
+
+   package Compiler is
+      for Switches ("Ada") use Lvgl_Ada_Config.Ada_Compiler_Switches;
+
+      case Lvgl_Ada_Config.Build_Profile is
+         when "development" =>
+            for Switches ("C") use ("-DLV_CONF_INCLUDE_SIMPLE", "-Og", "-g");
+         when others =>
+            for Switches ("C") use ("-DLV_CONF_INCLUDE_SIMPLE", "-O3", "-g");
+      end case;
+   end Compiler;
+
+end LVGL_Ada;
